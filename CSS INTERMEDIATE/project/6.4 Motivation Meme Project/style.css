@@ -1,0 +1,26 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+*{
+    font-family: "Libre Baskerville" , Arial, Helvetica, sans-serif;
+}
+
+html,body{
+    background: black;
+    color: white;
+}
+img{
+    border: 5px solid white;
+    
+}
+h1{
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+p{
+    text-transform: capitalize;
+}
+div{
+    margin: auto;
+text-align: center;
+    }
