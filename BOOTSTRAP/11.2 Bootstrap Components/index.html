@@ -8,12 +8,142 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <style>
-
+    #site-title{
+      margin: 0px;
+      padding: 0px;
+      display: inline;
+      font-size: 1.2rem;
+    }
+    #firstfeature{
+      max-width: 98vw;
+    }
   </style>
 </head>
 
-<body>
+<body data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-boxes" viewBox="0 0 16 16">
+        <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567zM7.5 9.933l-2.75 1.571v3.134l2.75-1.571zm1 3.134 2.75 1.571v-3.134L8.5 9.933zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134zM5.258 2.643 8 4.21l2.742-1.567L8 1.076zM15 9.933l-2.75 1.571v3.134L15 13.067zM3.75 14.638v-3.134L1 9.933v3.134z"/>
+      </svg><h1 id="site-title">Mooving</h1></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Menu
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Locate my package</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Mooving client-card</a></li>
+            </ul>
+          </li>
 
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Post code" aria-label="Post code">
+          <button class="btn btn-outline-success" type="submit">Check</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!--- HEROES-->
+  <div class="px-4 pt-5 my-5 text-center border-bottom">
+    <h1 class="display-4 fw-bold text-body-emphasis"> What is Mooving ?</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Mooving, a pioneering company in the logistics industry, sets itself apart through its unwavering commitment to responsibility, ensuring that every aspect of its operations aligns with the highest ethical standards. Renowned for its exceptional efficiency, Mooving proudly claims the title of having the fastest delivery speed in the USA, showcasing a dedication to prompt and reliable service. Customers trust Mooving not only for its impressive delivery speed but also for its steadfast commitment to transparency and reliability, making it a go-to choice for those who prioritize a seamless and trustworthy logistics experience.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+        <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Contact us</button>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Locate your package</button>
+      </div>
+    </div>
+    <div class="overflow-hidden" style="max-height: max-content;">
+      <div class="container px-5">
+        <img src="./moving-van.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+      </div>
+    </div>
+  </div>
+<!---FEATURE-->
+<div id="firstfeature" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+  <div class="col d-flex align-items-start">
+    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#bootstrap"></use></svg>
+    <div>
+      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><img src="./briefcase.svg" height="24" width="24" alt="briefcase"> A little bit of our history</h3>
+      <p>We started as a startup in <adress>Boston, USA</adress> in the start we was near to end three times with inside problems but because of our skills we grew a lot since there.</p>
+    </div>
+  </div>
+  <div class="col d-flex align-items-start">
+    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"></use></svg>
+    <div>
+      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><img src="./bus-front.svg" height="24" width="24" alt="front of a bus"> Delivery of the world</h3>
+      <p>We are the best delivery company in the world and we are probably the second best too.</p>
+    </div>
+  </div>
+  <div class="col d-flex align-items-start">
+    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"></use></svg>
+    <div>
+      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"/>
+      </svg> Why choose us?</h3>
+      <p>Before all you heard about us are you still in query?</p>
+    </div>
+  </div>
+  <div class="col d-flex align-items-start">
+    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"></use></svg>
+    <div>
+      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trophy" viewBox="0 0 16 16">
+        <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z"/>
+      </svg> Rewards</h3>
+      <p>The most speed delivery in the world: We had a delivery acrossing usa edge to edge in exactly 56 minutes and 24 seconds.</p>
+    </div>
+  </div>
+  
+  </div>
+</div>
+<!---Carousel--> 
+<div class="container">
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="./dog.jpg" class="d-flex w-100" alt="dog inside a box">
+      </div>
+      <div class="carousel-item">
+        <img src="./family.jpg" class="d-flex w-100" alt="a family">
+      </div>
+      <div class="carousel-item">
+        <img src="./couple.jpg" class="d-flex w-100" alt="a couple">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<footer class="py-3 my-4">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+  </ul>
+  <p class="text-center text-body-secondary">© 2023 Mooving, Inc</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 
