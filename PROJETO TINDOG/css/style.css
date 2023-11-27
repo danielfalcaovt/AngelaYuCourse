@@ -15,6 +15,10 @@
     background-position: 0% 50%;
   }
 }
+*{
+  margin: 0px;
+  padding: 0px;
+}
 
 .icon-square {
   width: 3rem;
@@ -25,4 +29,11 @@
 .profile-img {
   height: 100px;
   border-radius: 50%;
+}
+#pebbles{
+  border-radius: 50%;
+}
+.underlinefonte{
+  text-decoration: underline;
+
 }
