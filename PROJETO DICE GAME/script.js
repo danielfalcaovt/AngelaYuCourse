@@ -1,6 +1,7 @@
 let randomnm = () => {
     return Math.round(Math.random() * 6 +1)
-}
+}  
+let count = 0
 function play(){
     //PEGAR DOIS NUMEROS ALEATORIOS
     let number1 = randomnm()
@@ -19,9 +20,26 @@ function play(){
 //ANIMAÇAO DADOS GIRANDO
 
 
+   let dados = document.querySelector("div#dice1")
+    let dados2 = document.querySelector("div#dice2")
+    count += 40
+    dados.style.transform = `rotateX(${count})`
+/*  
+
+    setTimeout(() => {
+        
+        dados.classList.add("dicerolls")
+        dados2.classList.add("dicerolls")
+    }, 200);
+    setTimeout(() => {
+        dados2.classList.remove("dicerolls")
+        dados.classList.remove("dicerolls")
+    }, 600); */
 }
 
 function diceanimation(number1,number2,n3){
+setTimeout(() => {
+    
     let d1 = document.querySelector("div.d1")
     let d2 = document.querySelector("div.d2")
     let d3 = document.querySelector("div.d3")
@@ -79,8 +97,8 @@ function diceanimation(number1,number2,n3){
         d6.style.display = "block"
         d7.style.display = "none"
     }
-
-
+    
+    
     let dado2_1 = document.querySelector(".p2.d1")
     let dado2_2 = document.querySelector(".p2.d2") 
     let dado2_3 = document.querySelector(".p2.d3")
@@ -140,21 +158,26 @@ function diceanimation(number1,number2,n3){
         dado2_6.style.display = "block"
         dado2_7.style.display = "none"
     }
+}, 600);
 
     //SETANDO VITORIA
 
-
+    //remoçao animacoes dados
+    let dados = document.querySelector("div#dice1")
+    let dados2 = document.querySelector("div#dice2")
     let txtwin = document.querySelector("header>h1")
     if (n3 == 1){
         txtwin.innerHTML = "Player 1 Wins!"
-    
+
     }else if(n3 == 2){
         txtwin.innerHTML = "Player 2 Wins!"
-    
+
     }else{
         txtwin.innerHTML = "Draw"
-        
     }
+
+   
 
 
 }
+
