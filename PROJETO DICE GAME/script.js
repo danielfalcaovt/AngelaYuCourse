@@ -1,7 +1,6 @@
 let randomnm = () => {
     return Math.round(Math.random() * 6 +1)
 }  
-let count = 0
 function play(){
     //PEGAR DOIS NUMEROS ALEATORIOS
     let number1 = randomnm()
@@ -9,7 +8,6 @@ function play(){
     // O MAIOR VENCE
     if (number1 > number2){
         diceanimation(number1,number2,1)
-        pontosp1++
         p1.innerHTML = pontosp1
     }else if (number1 == number2){
         diceanimation(number1,number2,3)
@@ -20,25 +18,18 @@ function play(){
 //ANIMAÇAO DADOS GIRANDO
 
 
-   let dados = document.querySelector("div#dice1")
+    let dados = document.querySelector("div#dice1")
     let dados2 = document.querySelector("div#dice2")
-    count += 40
-    dados.style.transform = `rotateX(${count})`
-/*  
-
-    setTimeout(() => {
-        
+   
         dados.classList.add("dicerolls")
         dados2.classList.add("dicerolls")
-    }, 200);
-    setTimeout(() => {
-        dados2.classList.remove("dicerolls")
-        dados.classList.remove("dicerolls")
-    }, 600); */
+
+
+  
 }
 
 function diceanimation(number1,number2,n3){
-setTimeout(() => {
+
     
     let d1 = document.querySelector("div.d1")
     let d2 = document.querySelector("div.d2")
@@ -158,7 +149,7 @@ setTimeout(() => {
         dado2_6.style.display = "block"
         dado2_7.style.display = "none"
     }
-}, 600);
+
 
     //SETANDO VITORIA
 

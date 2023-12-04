@@ -105,7 +105,7 @@ article > div > h1{
 #dice2:hover{
     transition-duration: 0.3s;
     box-shadow:2px 2px 7px rgba(0, 0, 0, 0.761) ;
- /*    transform: scale(1.1); */
+    transform: scale(1.1); 
 }
 #dice2:active{
     transform: scale(0.9);
@@ -117,8 +117,9 @@ article > div > h1{
     transform: scale(1.1);
 }
 #dice1:active{
-/*     transform: scale(0.9); */
+    transform: scale(1);
 }
+
 
 #dice2>.dice{
     background: white;
@@ -185,10 +186,17 @@ footer span>a:hover{
 
 
 
-
 /* ANIMAÇOES */
 
 .dicerolls{
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     transform:rotateX(360deg);
 }
+    
+    
+    @media (max-width:480px) {
+        #dice1,#dice2{
+            width: 120px;
+            height: 120px;
+        }
+    }
