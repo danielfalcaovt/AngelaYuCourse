@@ -1,7 +1,20 @@
 let numberButtons = document.querySelectorAll('.drum').length
+
 for (let pos = 0;pos<numberButtons;pos++){
     document.querySelectorAll('.drum')[pos].addEventListener('click', function () {
-        let bInnerHTML = this.innerHTML
+        let key = this.innerHTML
+        checkLetter(key)
+    })
+
+}
+document.addEventListener('keydown',function(event){
+        checkLetter(event.key)
+    })
+
+
+    
+    
+    function checkLetter(bInnerHTML) {
         switch (bInnerHTML) {
             case 'w':
                 var t1 = new Audio('./sounds/tom-1.mp3')
@@ -35,5 +48,4 @@ for (let pos = 0;pos<numberButtons;pos++){
                 console.log()
                 break;
         }
-    })
-}
+    }
