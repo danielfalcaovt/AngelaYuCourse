@@ -6,6 +6,6 @@ for (let ps in audio){
 }
 for (let pos = 0;pos<numberButtons;pos++){
     document.querySelectorAll('.drum')[pos].addEventListener('click', function () {
-        this.style.color = 'white'
+        sounds[pos].play()
     })
 }
