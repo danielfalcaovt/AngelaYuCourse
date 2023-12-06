@@ -13,12 +13,8 @@ $('h1').click(function(){$('h1').css('color','red')})
 
 
 $('button').click(function(){
-    $("h1").css('transform','scale(1.1)')
-    $("h1").css("transitionDuration","1s")
-    setTimeout(() => {
-        
-        $('h1').css("transform","scale(1.0)")
-    }, 200);
+    $("h1").fadeToggle()
+    $("a").slideToggle()
 })
 let rotate = 0
 $('html').keydown(function(event){
@@ -33,4 +29,4 @@ $('html').keydown(function(event){
 $("h1").on("mouseover",function(){
     $("h1").css("color","purple")
 })
-$('h1').append("<p>a</p>")
+$('h1').append("<button>a</button>")
