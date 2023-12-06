@@ -4,15 +4,17 @@ for (let pos = 0;pos<numberButtons;pos++){
     document.querySelectorAll('.drum')[pos].addEventListener('click', function () {
         let key = this.innerHTML
         checkLetter(key)
+        addAnimation(key)
     })
 
 }
-document.addEventListener('keydown',function(event){
-        checkLetter(event.key)
-    })
+document.addEventListener('keydown', function(event){
+    checkLetter(event.key)
+    addAnimation(event.key)
+})
 
 
-    
+
     
     function checkLetter(bInnerHTML) {
         switch (bInnerHTML) {
@@ -49,3 +51,12 @@ document.addEventListener('keydown',function(event){
                 break;
         }
     }
+
+
+function addAnimation(key){
+    let anime = document.querySelector('.' + key)
+    anime.classList.add('pressed')
+    setTimeout(() => {
+        anime.classList.remove('pressed')
+    },100);
+}
