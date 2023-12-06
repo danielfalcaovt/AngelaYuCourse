@@ -17,4 +17,16 @@ function BellBoy (name,age,hasWorkPermit,languages){
 
 }
 var bellBoy2 = new BellBoy('jane',19,true,'Portuguese')
-console.log(bellBoy2)
+
+function HouseKeeper(name,years,exp,clean){
+    this.name = name
+    this.years = years
+    this.exp = exp
+    this.clean = ()=>{
+        console.log('Cleaned all with performance')
+    }
+
+}
+let houseKeeper1 = new HouseKeeper('JANE',18,2)
+console.log(houseKeeper1)
+houseKeeper1.clean()
