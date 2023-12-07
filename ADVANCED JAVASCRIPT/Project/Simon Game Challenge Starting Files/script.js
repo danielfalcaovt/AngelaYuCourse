@@ -1,81 +1,52 @@
-function randomN(){
-    let random = Math.floor(Math.random()* 3 )
-    return random
-}                
-//AO PRESSIONAR A TECLA A COMEÇAMOS O JOGO
+//3. At the top of the game.js file, create a new array called buttonColours and set it to hold the sequence "red", "blue", "green", "yellow" .
+var buttonColours = ["red", "blue", "green", "yellow"];
 
-$(document).keydown(function(event){
-    if (event.key === "a"){
-        game()
-    }else if(event.key ==="A"){
-        game()
-    }
-})
-let level = 1
-function game(){
-    //SE JOGO ESTIVER ROLANDO 
-    if ($(".btn").hasClass("square")){
-        $("h1").text("Game is already running...")
-        
-        
-        //JOGO :
-    }else{
-        
-        $("h1").text("Level: " + level)    
-        
-            //CADA QUADRADO RECEBE UM VALOR DE 1 A 4
-            let array = ['red','green','yellow','blue']
-            
-        // UM NUMERO ALEATORIO E GERADO
-            let randomArrayNumber = randomN()
-        $(".btn"+"#"+array[randomArrayNumber]).addClass("square")
-        // O QUADRADO COM O CLASS PISCA
-    $(".square").addClass("pressed")
-    setTimeout(() => {
-        $(".square").removeClass("pressed")
-    }, 100);
-// AO CLICAR NO QUADRADO AVANÇAMOS UM NIVEL
-    $(".btn").on("click",function(){
-        $(this).addClass("pressed")
-        setTimeout(() => {
-            $(this).removeClass("pressed")
-        }, 150);
-        // AO AVANÇAR O NIVEL MAIS UM QUADRADO PISCA
-        if($(this).hasClass("square")){
-            level++
-            $("h1").text("Level: " + level)
-            randomArrayNumber = randomN()
-        
-            $(".square").addClass("pressed")
-    setTimeout(() => {
-        $(".square").removeClass("pressed")
-    }, 100);
-        $(".btn").removeClass("square")
-        $(".btn" + "#" + array[randomArrayNumber]).addClass("square")
-        setTimeout(() => {
-            
-            $(".square").addClass("pressed")
-                setTimeout(() => {
-                    $(".square").removeClass("pressed")
-                }, 100);
-        }, 200);
+let userChosen = ""
+
+//5. At the top of the game.js file, create a new empty array called gamePattern.
+var gamePattern = [];
+
+//1. Inside game.js create a new function called nextSequence()
+function nextSequence() {
     
-        
-   
+    //2. Inside the new function generate a new random number between 0 and 3, and store it in a variable called randomNumber
+    var randomNumber = Math.floor(Math.random() * 4);
+    
+    //4. Create a new variable called randomChosenColour and use the randomNumber from step 2 to select a random colour from the buttonColours array.
+    var randomChosenColour = buttonColours[randomNumber];
+    
+    //6. Add the new randomChosenColour generated in step 4 to the end of the gamePattern.
+    gamePattern.push(randomChosenColour);
+    
+}
+
+//ESCOLHA DO USUARIO
+//PADRAO DO JOGO
+
+/* SE CADA ESCOLHA DO USUARIO FOR IGUAL
+    A CADA POSIÇAO DO PADRAO DO JOGO
+    ATE O FIM DO LAÇO ADICIONAR +1 COR
+    AO FINAL DO ARRAY
+*/
+
+nextSequence()
+
+function showPattern(){
+    for (let pos in gamePattern){
+    $("#"+gamePattern[pos]).
+    }
+}
+
+function game(){
+    for (let pos= 0; pos<gamePattern.length;){
+        $(".btn").click(function(){
+            userChosen = $(this).attr("id")    
+        })
+
+        if(userChosen == gamePattern[pos]){
+            pos++
         }else{
-
-            $("body").addClass("game-over")
-
-            setTimeout(() => {
-                $("body").removeClass("game-over")
-            }, 150);
-
-            // SE ERRAR O QUADRADO VOLTAMOS DO INICIO
-            $("h1").text("Game Over!! Restarting...")
-                setTimeout(() => {
-                location.reload()
-            }, 2000);
+            break
         }
-        }
-    )
-}}
+    }
+}
