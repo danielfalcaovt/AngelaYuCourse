@@ -25,7 +25,7 @@ $(".btn").click(function() {
 
   var userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
-  checkAnswer()
+  checkAnswer(userClickedPattern.length-1)
   playSound(userChosenColour);
   animatePress(userChosenColour);
 });
@@ -52,15 +52,44 @@ function playSound(name) {
   var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
 }
-
+function playWrong(audioname){
+    var audio = new Audio("./sounds/wrong.mp3")
+    audio.play()
+}
 function animatePress(currentColor) {
   $("#" + currentColor).addClass("pressed");
   setTimeout(function () {
     $("#" + currentColor).removeClass("pressed");
   }, 100);
 }
-
+//IF INSIDE CHECK ANSWER TO CHECK IF THE MOST RECENTS ARE CORRECT
+//
 function checkAnswer(currentLevel) {
+    if(userClickedPattern[currentLevel] == gamePattern[currentLevel]){
+        console.log("success")
+        if (userClickedPattern.length == gamePattern.length){
+            setTimeout(() => {
+                userClickedPattern = []
+                nextSequence()
+            }, 1000);
+        }
 
+    }else{
+        $("body").css("background","red")
+        setTimeout(() => {
+            $("body").css("background","#011F3F")
+        }, 150);
+        playWrong()
+        gamePattern = []
+        $("h1").text("Press any key to restart.")
+        $(document).keydown(function(event){
+            location.reload()
+        })
+    }
 
+}
+function startOver(){
+    started = ''
+    gamePattern = ''
+    level = ''
 }
