@@ -9,28 +9,31 @@ var userClickedPattern = [];
 //1. Use jQuery to detect when any of the buttons are clicked and trigger a handler function.
 $(".btn").click(function() {
 
+    $(this).addClass("pressed")
+    setTimeout(() => {
+        $(this).removeClass("pressed")
+    }, 150);
   //2. Inside the handler, create a new variable called userChosenColour to store the id of the button that got clicked.
   var userChosenColour = $(this).attr("id");
   //4. Add the contents of the variable userChosenColour created in step 2 to the end of this new userClickedPattern
   userClickedPattern.push(userChosenColour);
-  console.log(gamePattern)
-    console.log(userClickedPattern)
-    let isTrue = ""
-    for (let pos in userClickedPattern){
-        for (let ps in gamePattern){
-            if (gamePattern[ps]!=userClickedPattern[pos]&& gamePattern.length == userClickedPattern.length){
-                
+ 
+  console.log(userClickedPattern)
+  if (gamePattern.length == userClickedPattern.length){
+      for (let pos in gamePattern){
+      for (let ps in userClickedPattern){
+          if (gamePattern[pos] == userClickedPattern[ps] && gamePattern == userClickedPattern){
+                alert("igual")
+                nextSequence()
             }else{
-                isTrue = true
+                alert("error")
             }
         }
     }
-    if (isTrue == true){
-        userClickedPattern = []
-        nextSequence()
-    }else{
-        gamePattern = []
-    }
+
+  }else{
+    
+  }
 
   console.log(userClickedPattern);
   });
