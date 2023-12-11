@@ -1,0 +1,1 @@
+let bdeDados = ['daniel','pedro']
