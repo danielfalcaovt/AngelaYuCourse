@@ -7,12 +7,12 @@ const port = 3000;
 
 app.use(bodyparser.urlencoded({extended:true}))
 
-app.use((req,res,next)=>{
-  console.log(req.url + req.method)
-   next()
-})
-
-
+function logger(req,res,next){
+  console.log(req.method)
+  console.log(req.url)
+  next()
+}
+app.use(logger)
 
 app.get("/", (req, res) => {
   res.send("Hello");
