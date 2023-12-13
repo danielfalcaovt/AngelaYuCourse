@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.render("index.ejs",{
-    year:yr
+    year:yr,
+    name:"Band Generator"
   })  
 });
 function generateName(req,res,next){
