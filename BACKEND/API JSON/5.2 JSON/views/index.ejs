@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Taco Recipes</title>
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
+</head>
+
+<body>
+  <h1>Taco Town 🌮</h1>
+
+  <form action="/recipe" method="POST" class="buttons">
+    <button type="submit" value="chicken" name="choice">🍗</button>
+    <button type="submit" value="beef" name="choice">🥩</button>
+    <button type="submit" value="fish" name="choice">🐟</button>
+  </form>
+  <div id="recipeContainer" class="hidden">
+
+    <!-- If no recipe yet, show: -->
+    <h2><%if(!locals.name){%></h2>
+      <h2>Pick your favourite taco ingredient 👆</h2>
+      <%}else{%>
+        <%if(locals.name === "chicken"){%>
+        <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
+        <h2><%=data["0"].name%></h2>
+        <h3>Ingredients:</h3>
+        <ul id="ingredientsList">
+          <li><%=data["0"].ingredients.protein.name%>, <%=data["0"].ingredients.protein.preparation%></li>
+          <li><%=data["0"].ingredients.salsa.name%>, Spiceness <%=data["0"].ingredients.salsa.spiciness%></li>
+          <hr/>
+          <%for (let pos in data["0"].ingredients.toppings){%>
+            <li>
+              <%=data["0"].ingredients.toppings[pos].quantity%> of <%=data["0"].ingredients.toppings[pos].name%>
+            </li>
+
+            <hr/>
+            <%}%>
+          </ul>
+          <%}else if(locals.name === "beef"){%>
+            <h2><%=data["1"].name%></h2>
+            <h3>Ingredients:</h3>
+            <ul id="ingredientsList">
+              <li><%=data["1"].ingredients.protein.name%>, <%=data["1"].ingredients.protein.preparation%></li>
+              <li><%=data["1"].ingredients.salsa.name%>, Spiceness <%=data["1"].ingredients.salsa.spiciness%></li>
+              <hr/>
+              <%for (let pos in data["1"].ingredients.toppings){%>
+                <li>
+                  <%=data["1"].ingredients.toppings[pos].quantity%> of <%=data["1"].ingredients.toppings[pos].name%>
+                </li>
+
+                <hr/>
+                <%}%>
+            </ul>
+
+            <%}else{%>
+              <h2><%=data["2"].name%></h2>
+              <h3>Ingredients:</h3>
+              <ul id="ingredientsList">
+                <li><%=data["2"].ingredients.protein.name%>, <%=data["2"].ingredients.protein.preparation%></li>
+                <li><%=data["2"].ingredients.salsa.name%>, Spiceness <%=data["2"].ingredients.salsa.spiciness%></li>
+                <hr/>
+                <%for (let pos in data["2"].ingredients.toppings){%>
+                  <li>
+                    <%=data["2"].ingredients.toppings[pos].quantity%> of <%=data["2"].ingredients.toppings[pos].name%>
+                  </li>
+
+                  <hr/>
+                  <%}%>
+                </ul>
+
+            <%}%>
+            <%}%>
+
+  </div>
+</body>
+
+</html>
