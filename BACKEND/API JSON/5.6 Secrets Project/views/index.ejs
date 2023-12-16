@@ -13,14 +13,22 @@
 
 <body>
   <h1>What's your secret?</h1>
-  <div class="card">
+  <div onclick="restart()" class="card">
     <p>
-      <%= secret %>
+      <%= locals.secret %>
     </p>
   </div>
   <p class="user">
-    <%= user %>
+    <%= locals.user %>
   </p>
+  <script>
+    function restart(){
+      setInterval(() => {
+        location.reload()
+      }, 1000);
+    }
+
+  </script>
 </body>
 
 </html>
