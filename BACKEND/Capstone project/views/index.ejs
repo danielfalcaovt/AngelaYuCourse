@@ -4,8 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capstone Project</title>
+    <link rel="stylesheet" href="/style/main.css">
 </head>
 <body>
-    <h1>Teste</h1>
+    <header>
+        <%if (!locals.user && !locals.choice){%>
+            <h1><%=locals.welcome %></h1>
+            <%}else{%>
+          <h1 id="appearAnimation"><%=locals.welcome%></h1>
+            <% } %>
+    </header>
+    <main>
+        <%if (!locals.user && !locals.choice){%>
+        <div>
+        <form action="/" method="POST" autocomplete="off">
+            <label for="user">Your name:</label>
+            <input maxlength="10" minlength="2" type="text" name="username" placeholder="type your name here!">
+            <input type="submit" value="Send">
+        </form>
+        </div>
+
+        
+        <%}else{%>
+            <%if (!locals.choice){%>
+            <div id="secondDiv">
+                <h1>Tell me what would you like to know about?</h1>
+                <form id="secondForm" method="POST" autocomplete="off">
+                <input type="submit" formaction="/weather" value="Weather">
+                <input type="submit" formaction="/hours" value="Hours">
+
+            </form>
+            </div>
+            <%}else{%>
+                <div id="temperature">
+                <h1><%=locals.choice%></h1>
+                </div>
+
+            <%}%>
+        <%}%>
+    </main>
 </body>
 </html>

@@ -1,0 +1,135 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root{
+    --first-black: #00000A;
+    --blue-black:#000014;
+    --second-black:#1A1A1A;
+    --black-blue:#1A1946;
+    --blue:#000041;
+}
+body{
+    background-image: linear-gradient(to right,var(--blue-black),var(--black-blue));
+}
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--first-black);
+    height: 15vh;
+}
+header > h1{
+    color: white;
+}
+@keyframes appear{
+    0%{
+        transform: scale(0)
+    }90%{
+        transform: scale(1.2)
+    }95%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1)
+    }
+}
+#appearAnimation{
+    animation: appear ease-in-out 0.5s;
+}
+
+/*MAIN*/
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+main > div{
+    display: flex;
+    justify-content: center;
+    width: 50vw;
+    height: 85vh;
+}
+form{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form input{
+    padding:5px 15px;
+    border-radius: 15px;
+    background: var(--second-black);
+    color: white;
+    font-size: 1rem;
+    box-shadow: 2px 2px 2px black;
+}
+form input[type="submit"]{
+    margin-top: 5px;
+}
+form input:hover{
+    transition-duration: 1s;
+    transform: scale(1.1);
+}
+form input:not(:hover){
+    transition-duration: 0.5s;
+    transform: scale(1);
+}
+#secondForm >h1{
+    margin-bottom: 15px;
+    color: white;
+}
+input::placeholder{
+    color: white;
+}
+label{
+    display: block;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.499);
+}
+/* COLORS:
+#00000A FBLACK
+#000014 BBLACK
+#1A1A1A SBLACK
+#1A1946 BBLUE
+#000041 BLUE
+
+*/
+
+/*Second form*/
+
+#secondForm{
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    justify-content: space-around;
+    width: 100%;
+}
+#secondForm > input[type="submit"]{
+    padding: 5px 20px;
+}
+#secondDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+#temperature{
+    display: flex;
+    align-items: center;
+    color: white;
+}
+#temperature>h1{
+    font-size: 3rem;
+    background: var(--blue);
+    color: white;
+    border: 2px solid white;
+    padding: 50px;
+}
