@@ -28,6 +28,22 @@ app.post("/weather", async (req,res)=>{
                 choice:error.message,
             })
         }})
+ 
+app.post("/hours", async (req,res)=>{
+    try{
+        const data = new Date()
+        const hours = data.getHours()
+        const minutes = data.getMinutes()
+        const seconds = data.getSeconds()
+        const fullhour = `${hours}:${minutes}:${seconds}`
+        res.render("index.ejs",{
+            choice:fullhour,
+            welcome:"Hours:"
+        })}catch(error){
+            res.render("index.ejs",{
+                choice:error.message,
+            })
+        }})
 app.post("/",(req,res)=>{
     res.render("index.ejs",{
         user:req.body.username,
