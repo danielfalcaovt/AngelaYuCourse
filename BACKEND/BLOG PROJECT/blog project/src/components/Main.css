@@ -1,0 +1,53 @@
+main{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 1fr;
+    background-color:rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+}
+#form{
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+form{
+    display: flex;
+    width: max-content;
+    flex-direction: column;
+    align-items: center;
+}
+input[type="submit"]{
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 25px;
+    align-self: flex-end;
+    background-color: rgb(34, 62, 222);
+    color: white;
+    border: 0px;
+}
+input[type="text"]::placeholder{
+    color: black;
+}
+input[type="text"]{
+    margin-top: 15px;
+    padding: 10px 25px;
+    color: white;
+    background: rgba(46, 46, 46, 1);
+    border-top: 0px;
+    border-right: 0px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.183);
+}
+div.postroot{
+    height: max-content;
+    width: 100%;
+    
+}
+
+/* Color Theme Swatches in RGBA */
+.Dark-palette-1-rgba { color: rgba(15, 15, 15, 1); }
+.Dark-palette-2-rgba { color: rgba(31, 31, 31, 1); }
+.Dark-palette-3-rgba { color: rgba(46, 46, 46, 1); }
+.Dark-palette-4-rgba { color: rgba(61, 61, 61, 1); }
+.Dark-palette-5-rgba { color: rgba(77, 77, 77, 1); }
+.Dark-palette-6-rgba { color: rgb(34, 67, 153)   ; }

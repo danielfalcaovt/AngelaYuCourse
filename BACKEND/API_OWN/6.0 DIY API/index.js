@@ -95,10 +95,10 @@ app.delete("/jokes/:id", (req,res)=> {
 app.delete("/all", (req,res)=> {
   let userKey = req.query.key
   if (userKey === masterKey){
-  jokes.splice(0,jokes.length+1)
-  res.json("All jokes in database has been deleted!")
+  jokes = []
+  res.status(200).json("All jokes in database has been deleted!")
   }else{
-    res.json("You don't have permission to do this.")
+    res.status(404).json("You don't have permission to do this.")
   }
 })
 

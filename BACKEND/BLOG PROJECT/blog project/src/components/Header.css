@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
+
+header{
+    background:rgb(7, 7, 7);
+    display: flex;
+    color: white;
+    justify-content: space-between;
+}
+header nav{
+    display: flex;
+    max-width: 300px;
+    flex: 1;
+    align-items: center;
+}
+nav > ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+nav > ul > li{
+    font-size: 1.2rem;
+}
+nav > ul > li:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+#logo{
+    display: flex;
+    align-items: center;
+}
+@keyframes logobrightanimation{
+    0%{
+        filter: drop-shadow(3px 2px 2px rgba(255, 255, 255, 0.04));
+    }50%{
+        filter: drop-shadow(3px 2px 3px rgba(255, 255, 255, 0.19));
+    }100%{
+        filter: drop-shadow(3px 2px 2px rgba(255, 255, 255, 0.04));
+    }
+}
+img{
+    animation: logobrightanimation ease-in-out 5s infinite;
+    width: 100px;
+}
+header h1{
+    animation: logobrightanimation ease-in-out 5s infinite;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.233);
+    font-family: "Eagle Lake";
+}
+
+/* Color Theme Swatches in RGBA */
+.Dark-palette-1-rgba { color: rgba(15, 15, 15, 1); }
+.Dark-palette-2-rgba { color: rgba(31, 31, 31, 1); }
+.Dark-palette-3-rgba { color: rgba(46, 46, 46, 1); }
+.Dark-palette-4-rgba { color: rgba(61, 61, 61, 1); }
+.Dark-palette-5-rgba { color: rgba(77, 77, 77, 1); }
+.Dark-palette-6-rgba { color: rgb(34, 67, 153)   ; }

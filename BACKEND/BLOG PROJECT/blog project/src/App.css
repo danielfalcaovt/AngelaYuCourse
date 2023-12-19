@@ -1,0 +1,18 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+  background: rgb(18, 18, 18);
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 0.2fr 1fr;
+}
+header{
+  grid-area: 1/1/1/4;
+}
+main{
+  grid-area: 2/2/4/3;
+}
