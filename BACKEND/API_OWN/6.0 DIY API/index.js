@@ -65,18 +65,43 @@ app.put("/jokes/:id" , (req,res)=>{
 })
 //6. PATCH a joke
 app.patch("/jokes/:id" , (req,res)=>{
-  let oldID = req.params.id
-  let newWords = req.query.joke
-  let editJoke = {
-    jokeText:newWords,
+  let oldID = parseInt(req.params.id) // PEGAR ID VINDO DO CLIENT
+  let oldObj = jokes.find((joke) => joke.id === oldID) // ACHAR DENTRO DA ARRAY JOKES UM ID IGUAL
+  let newWords = req.query.joke // PEGAR NOVO "JOKE"
+  let newType = req.query.type // PEGAR NOVO "TYPE"
+  let editJoke = { //CRIANDO NOVO ARRAY PARA RECOLOCAR NO LUGAR 
+    id:oldID, //ID SERA O MESMO DE ANTES
+    jokeText:newWords||oldObj.jokeText, //SE HOUVER NOVO "JOKE" = NEWWORDS ELSE? POE A ANTIGA
+    jokeType:newType||oldObj.jokeType //SE HOUVER NOVO "TYPE" =  NEWTYPE ELSE? POE O ANTIGO
   }
-  delete jokes[oldID-1].jokeText
-  jokes[oldID-1].unshift(editJoke)
-  res.json(jokes[oldID-1])
+  jokes[oldID-1] = editJoke //ARRAY JOKES DA POSIÇAO RECEBE A ATUALIZAÇAO
+  res.json(jokes[oldID - 1]) //MOSTRAR O ARRAY PRONTO PRO USUARIO
 })
 //7. DELETE Specific joke
 
+app.delete("/jokes/:id", (req,res)=> {
+  let id = Number(req.params.id)
+  let oldObj = jokes.find((joke) => joke.id === id)
+  if (oldObj != undefined){
+  jokes.splice(id-1,id)
+  res.json(id + " Succesfully deleted")
+}else{
+  res.status(404).json("We couldn't delete an inexistent id.")
+  
+}
+})
+
 //8. DELETE All jokes
+app.delete("/all", (req,res)=> {
+  let userKey = req.query.key
+  if (userKey === masterKey){
+  jokes.splice(0,jokes.length+1)
+  res.json("All jokes in database has been deleted!")
+  }else{
+    res.json("You don't have permission to do this.")
+  }
+})
+
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
