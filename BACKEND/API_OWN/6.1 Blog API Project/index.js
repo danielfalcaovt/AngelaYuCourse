@@ -37,23 +37,56 @@ let lastId = posts.length;
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("/public"))
+app.use(express.static("public"));
 
 //Write your code here//
 
 //CHALLENGE 1: GET All posts
 
-app.get("/",(req,res) =>{
-  res.render("index.ejs",{
-    posts:posts
-  })
+app.get("/posts",(req,res) =>{
+  res.send(posts)
 })
 
 //CHALLENGE 2: GET a specific post by id
 
+app.get("/posts/:id", (req,res)=>{
+  let postId = Number(req.params.id)
+  let specific = posts.find((post) => post.id === postId)
+  res.send(specific)
+})
+
 //CHALLENGE 3: POST a new post
 
+app.post("/posts", (req,res) => {
+  let postId = lastId++
+  let postTitle = req.body.title
+  let postAuthor = req.body.author
+  let postText = req.body.content
+  let newPost = {
+    id: postId,
+    title: postTitle,
+    content:postText,
+    author: postAuthor,
+    date: new Date(),
+  }
+  posts.push(newPost)
+  res.send(posts)
+})
+
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
+app.patch("/posts/:id", (req,res) => {
+  let postId = Number(req.params.id)
+  let patchPost = posts.find((post) => post.id === postId)
+  patchPost = {
+    id: postId,
+    title:  req.body.title || posts[postId].title,
+    content:req.body.content || posts[postId].content,
+    author: req.body.author || posts[postId].author,
+    date: `Modified at ${new Date()}`,
+  }
+  posts[postId] = patchPost
+  res.send(posts)
+})
 
 //CHALLENGE 5: DELETE a specific post by providing the post id.
 
