@@ -4,8 +4,6 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 4000;
 
-
-
 // In-memory data store
 let posts = [
   {
@@ -20,7 +18,7 @@ let posts = [
     id: 2,
     title: "The Impact of Artificial Intelligence on Modern Businesses",
     content:
-    "Artificial Intelligence (AI) is no longer a concept of the future. It's very much a part of our present, reshaping industries and enhancing the capabilities of existing systems. From automating routine tasks to offering intelligent insights, AI is proving to be a boon for businesses. With advancements in machine learning and deep learning, businesses can now address previously insurmountable problems and tap into new opportunities.",
+      "Artificial Intelligence (AI) is no longer a concept of the future. It's very much a part of our present, reshaping industries and enhancing the capabilities of existing systems. From automating routine tasks to offering intelligent insights, AI is proving to be a boon for businesses. With advancements in machine learning and deep learning, businesses can now address previously insurmountable problems and tap into new opportunities.",
     author: "Mia Williams",
     date: "2023-08-05T14:30:00Z",
   },
@@ -29,9 +27,9 @@ let posts = [
     title: "Sustainable Living: Tips for an Eco-Friendly Lifestyle",
     content:
       "Sustainability is more than just a buzzword; it's a way of life. As the effects of climate change become more pronounced, there's a growing realization about the need to live sustainably. From reducing waste and conserving energy to supporting eco-friendly products, there are numerous ways we can make our daily lives more environmentally friendly. This post will explore practical tips and habits that can make a significant difference.",
-      author: "Samuel Green",
-      date: "2023-08-10T09:15:00Z",
-    },
+    author: "Samuel Green",
+    date: "2023-08-10T09:15:00Z",
+  },
 ];
 
 let lastId = posts.length;
@@ -39,64 +37,23 @@ let lastId = posts.length;
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"))
+app.use(express.static("/public"))
 
 //Write your code here//
 
-//CHALLENGE 1: GET All posts ^^^^^^
+//CHALLENGE 1: GET All posts
 
-app.get("/",(req,res) => {
-  res.render("index.ejs", {
+app.get("/",(req,res) =>{
+  res.render("index.ejs",{
     posts:posts
   })
 })
 
 //CHALLENGE 2: GET a specific post by id
 
-app.get("/posts/:id", (req,res) =>{
-  let postid = parseInt(req.params.id)
-  let specific = posts.find((post)=> post.id === postid)
-  res.render("index.ejs", {
-    specific:specific
-  })
-})
-
 //CHALLENGE 3: POST a new post
 
-app.post("/posts", (req,res) =>{
-  let newTitle = req.query.title
-  let newContent = req.query.content
-  let newAuthor = req.query.author
-  let newDate = req.query.date
-
-  let newPost = {
-    id: lastId++,
-    title: newTitle,
-    content:
-      newContent,
-      author: newAuthor,
-      date: newDate,
-  }
-  posts.push(newPost)
-})
-
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
-app.patch("/edit/:id", (req,res) =>{
-  let newTitle = req.query.title
-  let newContent = req.query.content
-  let newAuthor = req.query.author
-  let newDate = req.query.date
-
-  let newPost = {
-    id: lastId++,
-    title: newTitle,
-    content:
-      newContent,
-      author: newAuthor,
-      date: newDate,
-  }
-  posts.push(newPost)
-})
 
 //CHALLENGE 5: DELETE a specific post by providing the post id.
 
