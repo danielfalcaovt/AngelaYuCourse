@@ -1,7 +1,13 @@
-
+import axios from "axios";
 
 export default function Post() {
-    return(
+        axios.get("http://localhost:5000",  (req,res)=>{
+            console.log(res);
+        })
+ 
+
+
+        return(
         <div className="postbox">
             <div className="postuser">
                 <img className="postuserimg" src="" alt="" />
@@ -12,5 +18,5 @@ export default function Post() {
             </div>
         </div>
 
-    )
+)
 }

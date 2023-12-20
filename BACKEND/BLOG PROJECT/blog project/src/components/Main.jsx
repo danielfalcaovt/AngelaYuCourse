@@ -1,4 +1,5 @@
 import "./Main.css"
+import Post from "./Post"
 
 export default function MainContent(){
     return(
@@ -11,7 +12,7 @@ export default function MainContent(){
                     </form>
                 </div>
                 <div className="postroot">
-
+                <Post />
                 </div>
             </main>
         </>
