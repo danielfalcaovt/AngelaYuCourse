@@ -18,19 +18,26 @@ const db = new pg.Client({
 
 db.connect();
 
-app.get("/", async (req, res) => {
+async function checkVisited(){
+
   const result = await db.query("SELECT country_code FROM visited_countries");
   let countries = [];
-
+  
   result.rows.forEach((country) => {
     countries.push(country.country_code);
   });
+  return countries
+}
 
+
+app.get("/", async (req, res) => {
+  const countries = await checkVisited()
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
   });
 });
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
@@ -39,12 +46,16 @@ app.post("/add", async (req, res) => {
   const country = capitalizeFirstLetter(request)
   console.log(country);
   const c_code = await db.query(`SELECT country_code FROM countries WHERE country_name LIKE '${country}%'`);
-  if (c_code.rows !== 0){
+  if (c_code.rows.length !== 0){
   const code = c_code.rows["0"].country_code
   await db.query(`INSERT INTO visited_countries (country_code)
                   VALUES ($1)`,[code]);
              
                   res.redirect("/");
+}else{
+  
+
+    res.redirect("/")
 }
 });
 
