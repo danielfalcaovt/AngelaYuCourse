@@ -39,12 +39,13 @@ app.post("/add", async (req, res) => {
   const country = capitalizeFirstLetter(request)
   console.log(country);
   const c_code = await db.query(`SELECT country_code FROM countries WHERE country_name LIKE '${country}%'`);
+  if (c_code.rows !== 0){
   const code = c_code.rows["0"].country_code
   await db.query(`INSERT INTO visited_countries (country_code)
                   VALUES ($1)`,[code]);
-
-  //OLD COUNTRIES
-  res.redirect("/");
+             
+                  res.redirect("/");
+}
 });
 
 app.listen(port, () => {
