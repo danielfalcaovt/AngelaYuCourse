@@ -50,7 +50,7 @@ app.post("/add", async (req, res) => {
   console.log(country);
   try{
   // Se o pais for encontrado dentro do banco de dados de paises, o codigo do pais sera retornado
-  const c_code = await db.query(`SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%$1%'`,[country.toLowerCase()]);
+  const c_code = await db.query(`SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%'|| '$1' || '%'`,[country.toLowerCase()]);
   console.log(c_code.rows["0"]);
   const code = c_code.rows["0"].country_code
   console.log(code);
