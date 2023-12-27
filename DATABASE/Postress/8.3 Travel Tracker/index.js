@@ -46,12 +46,11 @@ app.post("/add", async (req, res) => {
   const countries = await checkVisited()
   // Pegar o REQ do usuario, Capitalizar para procurar dentro do banco de dados de paises
   const request = req.body.country.trim();
-  const country = capitalizeFirstLetter(request)
+  const country = request.toLowerCase()
   console.log(country);
   try{
   // Se o pais for encontrado dentro do banco de dados de paises, o codigo do pais sera retornado
-  const c_code = await db.query(`SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%'|| '$1' || '%'`,[country.toLowerCase()]);
-  console.log(c_code.rows["0"]);
+  const c_code = await db.query(`SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%'|| $1 || '%'`,[country]);
   const code = c_code.rows["0"].country_code
   console.log(code);
   try{
