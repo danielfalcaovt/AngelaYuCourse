@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHAT IS THE PASSWORD GUY????</title>
+</head>
+<body>
+    <h1>TELL ME THE F* PASSWORD!!!</h1>
+    <%if (locals.wrong == 1){%>
+        <h2>YOU HAVEN'T THE PASS? WHAT ARE YOU DOING HERE MOTHERF*? </h2>
+        <%}else if (locals.wrong == 2){%>
+        <h2>You will have REALLY BIG PROBLEMS!</h2>
+        <%}else if (locals.wrong == 3){%>
+        <h2><%=message%></h2>
+        <%}%>
+    <form action="/" method="post">
+        <input type="password" name="password" id="password">
+        <input type="submit" value="Try">
+    </form>
+</body>
+</html>

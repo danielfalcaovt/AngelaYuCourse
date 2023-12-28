@@ -47,6 +47,3 @@ function sound(key) {
 document.addEventListener("keypress", function (event) {
     sound(event.key)
 });
-$("footer").addEventListener("pageshow",function(event){
-    console.log("alert")
-})
