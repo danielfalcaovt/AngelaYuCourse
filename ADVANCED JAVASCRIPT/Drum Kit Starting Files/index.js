@@ -8,13 +8,12 @@ let audio = [
   "tom-4.mp3",
 ];
 let sounds = [];
-let numberButtons = document.querySelectorAll(".drum").length;
+let numberButtons = $(".drum").length;
 for (let ps in audio) {
   sounds.push(new Audio(`./sounds/${audio[ps]}`));
 }
 for (let pos = 0; pos < numberButtons; pos++) {
-  document.querySelectorAll(".drum")
-    [pos].addEventListener("click", function () {
+  $(".drum")[pos].click(function () {
       let buttonpressed = this.innerHTML;
         sound(buttonpressed)
     });
@@ -48,6 +47,6 @@ function sound(key) {
 document.addEventListener("keypress", function (event) {
     sound(event.key)
 });
-addEventListener("pageshow",function(event){
-    
+$("footer").addEventListener("pageshow",function(event){
+    console.log("alert")
 })

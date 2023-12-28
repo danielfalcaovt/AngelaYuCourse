@@ -1,6 +1,8 @@
 body {
   text-align: center;
   background-color: #283149;
+  height: 2000px;
+  position: relative;
 }
 
 h1 {
@@ -14,6 +16,10 @@ h1 {
 footer {
   color: #DBEDF3;
   font-family: sans-serif;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .w {
