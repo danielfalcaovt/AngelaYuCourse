@@ -54,9 +54,17 @@ document.addEventListener('keydown', function(event){
 
 
 function addAnimation(key){
-    let anime = document.querySelector('.' + key)
-    anime.classList.add('pressed')
+    let anime = $("."+ key);
+    anime.addClass('pressed');
     setTimeout(() => {
-        anime.classList.remove('pressed')
+        anime.removeClass('pressed');
     },100);
 }
+
+const scrollPos = 0
+$(document).on('scroll',function(evt){
+    console.log(window.scrollY)
+    if(window.scrollY >= 155){
+        $("footer").show().animate({transform:"translate(0%, -10%)"});
+    };
+});

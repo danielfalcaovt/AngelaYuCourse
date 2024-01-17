@@ -12,6 +12,10 @@ h1 {
 }
 
 footer {
+  display: none;
+  position: relative;
+  bottom: 0px;
+  left: 50%;
   color: #DBEDF3;
   font-family: sans-serif;
 }
