@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review</title>
+    <title>No idea.</title>
 </head>
 <body>
-    <h1>Review</h1>
-    <p><% if(locals.calc){%></p>
-        <%=locals.calc%><%}else{%>
-           <p>Insert a number.</p> 
-            <%}%>
-    <form action="/" method="post">
-        <input type="number" name="num1" id="num1">
-        <input type="number" name="num2" id="num2">
-        <button>calcular</button>
-    </form>
+    <div id="container">
+        <div id="container-title">
+            <h1>No idea.</h1>
+        </div>
+        <div id="container-content">
+<form action="/" method="post">
+                <input type="text" name="text" id="text">
+                <button>Send</button>
+</form>
+
+            <div id="res">
+                <p><%=locals.userResponse||locals.error?`Name${locals.userResponse||locals.error}`:"What is your name ?"%></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
