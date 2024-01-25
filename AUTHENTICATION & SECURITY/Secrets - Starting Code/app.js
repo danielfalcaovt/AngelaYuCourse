@@ -30,34 +30,40 @@ app.get("/login", (req, res) => {
 });
 let attempt = 0
 app.post("/login", async (req, res) => {
-    bcrypt.hash()
-    try {
-    const user = req.body.username;
-    const checkUser = await db.query("SELECT * FROM users WHERE email = $1", [
-      user,
-    ]);
-    if (checkUser.rows.length >= 1) {
-      const pass = req.body.password;
-      const userData = checkUser.rows[0];
-      if (userData.password === pass) {
-        res.render("secrets.ejs");
-        attempt = 0;
-      } else {
-        attempt++
-        console.log(attempt);
-        if (attempt === 5){
-            res.render("home.ejs");
+    bcrypt.hash(password,saltRounds, async(err,hash)=>{
+        if (err){
+            console.log(err);
         }else{
+            try {
+            const user = req.body.username;
+            const checkUser = await db.query("SELECT * FROM users WHERE email = $1", [
+              user,
+            ]);
+            if (checkUser.rows.length >= 1) {
+              const pass = req.body.password;
+              const userData = checkUser.rows[0];
+              if (userData.password === pass) {
+                res.render("secrets.ejs");
+                attempt = 0;
+              } else {
+                attempt++
+                console.log(attempt);
+                if (attempt === 5){
+                    res.render("home.ejs");
+                }else{
+                    res.render("login.ejs");
+                }
+            }
+            } else {
+              res.send("You might not registered.");
+            }
+          } catch (err) {
             res.render("login.ejs");
+            console.log(err);
+          }
+
         }
-    }
-    } else {
-      res.send("You might not registered.");
-    }
-  } catch (err) {
-    res.render("login.ejs");
-    console.log(err);
-  }
+    });
 });
 
 app.get("/register", (req, res) => {
