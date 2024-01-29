@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/index.css">
+    <title>Register Page</title>
+</head>
+<body>
+    
+    <video autoplay loop>
+        <source src="praiaanimada.mp4">
+        <p>Seu navegador nao e compativel com animaçoes.</p>
+    </video>
+    <div class="login-container">
+        <div class="login-title">
+            <h1>Register</h1>
+        </div>
+        <form action="/register" method="POST">
+            <input placeholder="Email" class="userInfo" type="email" name="username" id="user">
+            <input placeholder="Password" class="userInfo" type="password" name="password" id="pass">
+            <input type="submit" value="Send">
+        </form>
+        <a href="/login">Already have an account ?</a>
+    </div>
+</body>
+</html>
