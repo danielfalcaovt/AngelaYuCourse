@@ -6,6 +6,8 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 import session from "express-session";
 import env from "dotenv";
+import GoogleStrategy from "passport-google-oauth2";
+import ejs from "ejs";
 
 const app = express();
 const port = 3000;
@@ -43,9 +45,20 @@ app.get("/login", (req, res) => {
   res.render("login.ejs");
 });
 
-app.get("/auth/google", passport.authenticate("google",{
-  scope:["profile","email"]
-}))
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["email", "profile"]
+  })
+);
+
+app.get(
+  "/auth/google/secrets",
+  passport.authenticate("google", {
+    successRedirect: "/secrets",
+    failureRedirect: "/login",
+})
+);
 
 app.get("/register", (req, res) => {
   res.render("register.ejs");
@@ -79,7 +92,7 @@ app.post(
 
 app.post("/register", async (req, res) => {
   const email = req.body.username;
-  const password = req.body.password;
+  const password = req.body.password.trim();
 
   try {
     const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
@@ -89,13 +102,14 @@ app.post("/register", async (req, res) => {
     if (checkResult.rows.length > 0) {
       req.redirect("/login");
     } else {
-      bcrypt.hash(password, saltRounds, async (err, hash) => {
+      bcrypt.hash(password.trim(), saltRounds, async (err, hash) => {
         if (err) {
           console.error("Error hashing password:", err);
         } else {
+          const hashedPassword = hash.trim();
           const result = await db.query(
             "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
-            [email, hash]
+            [email, hashedPassword]
           );
           const user = result.rows[0];
           req.login(user, (err) => {
@@ -111,6 +125,7 @@ app.post("/register", async (req, res) => {
 });
 
 passport.use(
+  "local",
   new Strategy(async function verify(username, password, cb) {
     try {
       const result = await db.query("SELECT * FROM users WHERE email = $1 ", [
@@ -118,7 +133,8 @@ passport.use(
       ]);
       if (result.rows.length > 0) {
         const user = result.rows[0];
-        const storedHashedPassword = user.password;
+        const storedHashedPassword = user.password.trim();
+        const userPassword = password.trim();
         bcrypt.compare(password, storedHashedPassword, (err, valid) => {
           if (err) {
             //Error with password check
@@ -127,14 +143,17 @@ passport.use(
           } else {
             if (valid) {
               //Passed password check
+              console.log("???");
               return cb(null, user);
             } else {
               //Did not pass password check
+              console.log("Wrong password.");
               return cb(null, false);
             }
           }
         });
       } else {
+        console.log("User not found.");
         return cb("User not found");
       }
     } catch (err) {
@@ -143,14 +162,33 @@ passport.use(
   })
 );
 
-passport.use("google",new GoogleStrategy({
-  ClientID:process.env.GOOGLE_ID,
-  ClientSecret:process.env.GOOGLE_SECRET,
-  callbackURL:"https://localhost:3000/auth/google/secrets",
-  userProfileURL:"https://www.googleapis.com/oauth2/v3/user/userinfo"
-},async (accessToken, refreshToken, profile, cb)=>{
-  profile ? console.log(profile) : console.log("Dont have");
-}))
+passport.use(
+  "google",
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/google/secrets",
+      userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
+    },
+    async (accessToken, refreshToken, profile, cb) => {
+      console.log(profile);
+      try{
+        const result = await db.query("SELECT * FROM users WHERE email = $1",[profile.email])
+        if (result.rows.length > 0) {
+          console.log("USER FOUND.");
+          cb(null,result.rows[0]);
+        }else{
+          console.log("USER NOT FOUND.");
+          const newUser = await db.query("INSERT INTO users(email,password) VALUES($1,$2)",[profile.email,"google"]);
+          cb(null, newUser.rows[0]);
+        }
+      }catch(err){
+        cb(err);
+      }
+    }
+  )
+);
 
 passport.serializeUser((user, cb) => {
   cb(null, user);
@@ -162,4 +200,3 @@ passport.deserializeUser((user, cb) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
