@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>SCEA</title>
+</head>
+<body>
+    <header>
+        <div class="title">
+            <h1>SCEA</h1>
+            <button>
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+        </div>
+    </header>
+    <main>
+        <div>
+        <article class="send-area">
+           <div>
+               <h1>Cadastro</h1>
+               <form id="cadastro" action="/send" method="POST">
+                   <input placeholder="Produto" required maxlength="20" type="text" name="produto" id="produto">
+                   <input placeholder="Estoque" required max="5000" type="number" name="estoque" id="valor">
+                   <button>Enviar</button>
+               </form>
+           </div>
+        </article>
+
+        <article class="products-area">
+            <div class="products">
+                <h1>Registered products:</h1>
+                <% if (locals.products){%>
+                    <%locals.products.map((product)=>{%>
+                            <div class="product-name">
+                                <h2><%=product.posttext%></h2>
+                            </div>
+                        <%})%>
+                <%}%>
+            </div>
+        </article>
+    </div>
+    </main>
+    <footer>
+        <div class="copyright"></div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
