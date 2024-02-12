@@ -7,7 +7,6 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 import bcrypt from "bcryptjs";
 import session from "express-session";
-
 env.config();
 
 const db = new pg.Client({
@@ -25,60 +24,148 @@ const __dirname = import.meta.dirname;
 
 app.use(
     session({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
+        secret: process.env.SESSION_SECRET,
+        resave: false,
       saveUninitialized: true,
     })
-  );
-
+    );
+    
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
+
+
 app.get("/",async(req,res)=>{
     if(req.isAuthenticated()){
-       try{
-        const userid = req.user.id;
-        const result = await db.query("SELECT * FROM posts WHERE userid = $1",[userid]);
-        const cadastrados = result.rows;
-        res.render("index.ejs",{
-            products:cadastrados
-        });
-       }catch(err){
-            console.log(err);
-       }
+        res.redirect("/consulta");
     }else{
         res.redirect("/login");
     }
 });
+app.get("/cadastro", async (req,res)=>{
+    if(req.isAuthenticated()){
+        try{
+         const userid = req.user.id;
+         const result = await db.query("SELECT * FROM posts");
+         const cadastrados = result.rows;
+         console.log(cadastrados);
+         res.render("index.ejs",{
+             products:cadastrados,
+             cadastro:true
+            });
+        }catch(err){
+             console.log(err);
+        }
+    }else{
+        res.redirect("/login");
+     }
+});
 
-app.post("/send",async(req,res)=>{
+
+app.post("/cadastro",async(req,res)=>{
     if (req.isAuthenticated()){
         const userid = req.user.id;
-        const produto = req.body.produto;
-        const estoque = req.body.estoque;
-        let checkHave = await db.query("SELECT * FROM posts WHERE posttext = $1",[produto]);
+        const produto = req.body.produto.trim();
+        console.log(produto);
+        const estoque = req.body.estoque.trim();
+        let checkHave = await db.query("SELECT * FROM posts WHERE (posttext = $1 AND estoque = $2)",[produto,estoque]);
         if (checkHave.rows.length > 0){
             console.log('Already registered.');
         }else{
-            const posts = await db.query("INSERT INTO posts(posttext,userid) VALUES($1,$2) RETURNING *",[produto,userid]); 
+            await db.query("INSERT INTO posts(posttext,estoque,userid) VALUES($1,$2,$3)",[produto,estoque,userid]); 
         }
         res.redirect("/");
     }else{
         res.redirect("/login");
     }
 });
+app.get("/consulta",async(req,res)=>{
+    if(req.isAuthenticated()){
+        try{
+         const userid = req.user.id;
+         const result = await db.query("SELECT * FROM posts");
+         const cadastrados = result.rows;
+         res.render("index.ejs",{
+             products:cadastrados,
+             consulta:true
+         });
+        }catch(err){
+             console.log(err);
+        }
+     }else{
+         res.redirect("/login");
+     }    
+})
+app.post("/consulta",async(req,res)=>{
+    if(req.isAuthenticated()){
+        const userData = req.body.produto.trim();
+        const result = await db.query("SELECT * FROM posts WHERE posttext = $1",[userData]);
+        console.log(result.rows);
+        if (result.rows.length >0 ){
+            const produto = result.rows[0];
+            res.render("index.ejs",{
+                products:produto,
+                consulta:true
+            })
+        }else{
+            res.redirect("/consulta");
+        };
+    }else{
+        res.redirect("/login");
+    }
+});
 
-app.get('/send',(req,res)=>{
-    res.redirect("/");
+app.get("/delete",async(req,res)=>{
+    if (req.isAuthenticated()){
+        console.log(req.user.admin);
+        try{
+            const userid = req.user.id;
+            const result = await db.query("SELECT * FROM posts");
+            const cadastrados = result.rows;
+            res.render("index.ejs",{
+                products:cadastrados,
+                delete:true
+            });
+           }catch(err){
+                console.log(err);
+           }
+    }else{
+        res.redirect("/login");
+
+    }
+});
+app.post("/delete",async(req,res)=>{
+    if (req.isAuthenticated()){
+        if (req.user.admin === "Y"){
+            try{
+                const userData = req.body.produto;
+                const dadosTratados = Number(userData.trim());
+                const check = await db.query("SELECT * FROM posts WHERE id = $1",[dadosTratados]);
+                if (check.rows.length > 0){
+                    const deleting = await db.query("DELETE FROM posts WHERE id = $1",[dadosTratados]);
+                    res.redirect("/delete");
+                }else{
+                    res.redirect("/delete");
+                }
+            }catch(err){
+                    console.log(err);
+               }
+        }else{
+            res.send("You do not have permission to do that.").statusCode(300)
+            
+        }
+    }else{
+        res.redirect("/login");
+
+    }
 });
 
 app.get('/login',(req,res)=>{
     res.render("login.ejs");
 }); 
-
 app.post("/login",passport.authenticate("local",{
     successRedirect:"/",
     failureRedirect:"/login"
@@ -97,7 +184,7 @@ app.post("/register", async (req,res)=>{
         res.redirect("/login");
     }else{
         bcrypt.hash(password.trim(),10, async (err,hash)=>{
-            const user = await db.query("INSERT INTO users(email,password) VALUES($1,$2) RETURNING *",[username,hash.trim()]);
+            const user = await db.query("INSERT INTO users(email,password,admin) VALUES($1,$2,$3) RETURNING *",[username,hash.trim(),"N"]);
             console.log(user.rows[0]);
             res.render("index.ejs");
         });

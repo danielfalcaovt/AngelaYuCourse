@@ -6,7 +6,7 @@
 header{
     height: 10vh;
     display: grid;
-    grid-template-columns:0.2fr 0.3fr 0.3fr 0.2fr;
+    grid-template-columns:0.1fr 0.4fr 0.4fr 0.1fr;
     background-color: #0F0F0F;
 }
 .title{
@@ -18,14 +18,26 @@ header{
     font-weight: bolder;
     color: white;
 }
-
+header a {
+    text-decoration: none;
+    color: white;
+}
+header a:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition-duration: 0.2s;
+}
+header a:not(:hover){
+    transform: scale(1);
+    transition-duration: 0.2s;
+}
 /*MAIN*/
 html,body{
     background-color: #692D86;
 }
 main{
     display: grid;
-    grid-template-columns: 0.2fr 0.6fr 0.2fr;
+    grid-template-columns: 0.1fr 0.8fr 0.1fr;
 }
 main >div{
     background-color: white;
@@ -61,7 +73,7 @@ main .send-area > div{
     justify-content: center;
     align-items: center;
 }
-#cadastro > input{
+#cadastro > input[type="text"], input[type="number"]{
     margin: 6px 0px;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
@@ -73,6 +85,10 @@ main .send-area > div{
     text-indent: 5px;
     width: 250px;
     font-size: 1.2rem;
+}
+#cadastro > input[type="checkbox"]{
+    width: 25px;
+    height: 25px;
 }
 #cadastro > input:focus{
     outline: 0px;
@@ -88,15 +104,98 @@ main .send-area > div{
     cursor: pointer;
 }
 
-main .products-area{
-
-}
 /*FOOTER*/
 footer{
     display: grid;
     height: 10vh;
-    grid-template-columns: 0.2fr 0.6fr 0.2fr;
+    grid-template-columns: 0.1fr 0.8fr 0.1fr;
+    background-image: linear-gradient(to right, #5A1E68,#450B53);
 }
 footer > div{
     grid-area: 1/2/1/2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.25rem;
+    color: #450B53;
+}
+
+#products{
+    border-collapse: collapse;
+}
+#products tbody{
+    height: 100%;
+    overflow-y: auto;
+}
+.products-area{
+    max-width: 100%;
+    overflow-y: scroll
+}
+.products-area::-webkit-scrollbar{
+    background-color: transparent;
+    width: 10px;
+}
+
+.products-area::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+.products-area::-webkit-scrollbar-thumb{
+    background-color:#852faf;
+    border-radius: 15px;
+}
+.products{
+    margin: 5px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#products th,td {
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px 0px;
+}
+.table-header{
+    background: #692D86;
+    color: white;
+}
+.fill{
+    background-color: #450B53;
+    color: white;
+}
+#menu{
+    display: flex;
+}
+#hamburguer{
+    background-color: transparent;
+    border: 0px;
+    outline: 0px;
+    grid-area: 1/3/1/3;
+    position: relative;
+}
+#hamburguer:focus{
+    outline: 0px;
+}
+
+.box{
+    height: 30px;
+    width: 50px;
+    position: absolute;
+    right: 0px;
+    top: 25%;
+    cursor: pointer;
+}
+.box > div{
+    width: 100%;
+    height: 6px;
+    background-color: white;
+    border-radius: 15px;
+}
+#ft-line{
+    margin-bottom: 5px;
+}
+#mid-line{
+    margin-bottom: 5px;
+}
+.a7k29loooppps{
+    display: none;
 }

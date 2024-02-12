@@ -3,50 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles/styles.css">
     <title>SCEA</title>
 </head>
+<%- include('partials/header.ejs') %>
 <body>
-    <header>
-        <div class="title">
-            <h1>SCEA</h1>
-            <button>
-                <div></div>
-                <div></div>
-                <div></div>
-            </button>
-        </div>
-    </header>
     <main>
         <div>
         <article class="send-area">
-           <div>
-               <h1>Cadastro</h1>
-               <form id="cadastro" action="/send" method="POST">
+            <div>
+               <%if (locals.cadastro){%>
+               <h1>Cadastramento</h1>
+               <form id="cadastro" action="/cadastro" method="POST">
                    <input placeholder="Produto" required maxlength="20" type="text" name="produto" id="produto">
                    <input placeholder="Estoque" required max="5000" type="number" name="estoque" id="valor">
                    <button>Enviar</button>
                </form>
+               <%}else if (locals.delete){%>
+                <h1>Exclusão</h1>
+               <form id="cadastro" action="/delete" method="POST">
+                   <input placeholder="ID Do Produto" required maxlength="20" type="text" name="produto" id="produto">
+                   <label for="confirm">Confirmar ?</label>
+                   <input required type="checkbox" name="confirm" id="confirm">
+                   <button style="background-color: red;">DELETAR</button>
+               </form>
+                <%}else if (locals.alterar){%>
+                    <h1>Alteração</h1>
+               <form id="cadastro" action="/alterar" method="POST">
+                   <input placeholder="Produto" required maxlength="20" type="text" name="produto" id="produto">
+                   <input placeholder="Estoque" required max="5000" type="number" name="estoque" id="valor">
+                   <button>Enviar</button>
+               </form>
+                    <%}else{%>
+                        <h1>Consulta</h1>
+                        <form id="cadastro" action="/consulta" method="POST">
+                            <input placeholder="Produto" required maxlength="20" type="text" name="produto" id="produto">
+                            <button>Enviar</button>
+                        </form>
+                    <%}%>
            </div>
         </article>
-
+        
         <article class="products-area">
             <div class="products">
-                <h1>Registered products:</h1>
-                <% if (locals.products){%>
-                    <%locals.products.map((product)=>{%>
-                            <div class="product-name">
-                                <h2><%=product.posttext%></h2>
-                            </div>
-                        <%})%>
-                <%}%>
+                <table id="products">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Produto:</th>
+                            <th>Estoque:</th>
+                            <th>Matrícula:</th>
+                            <th>M. do Produto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <% if (locals.products && locals.products.length > 1){%>
+                            <%locals.products.map((product)=>{%>
+                                <tr>
+                        <td class="fill"><%=product.posttext%></td>
+                        <td><%=product.estoque%></td>
+                        <td><%=product.userid%></td>
+                        <td><%=product.id%></td>
+                    </tr>
+                    <%})%>
+                    <%}else if(locals.products){%>
+                        <tr>
+                            <td class="fill"><%=products.posttext%></td>
+                            <td><%=products.estoque%></td>
+                            <td><%=products.userid%></td>
+                            <td><%=products.id%></td>
+                        </tr>
+                        <%}%>
+                </tbody>
+                </table>
             </div>
         </article>
     </div>
     </main>
-    <footer>
-        <div class="copyright"></div>
-    </footer>
+    <%- include('partials/footer.ejs') %>
     <script src="script.js"></script>
 </body>
 </html>
