@@ -139,7 +139,9 @@ app.get("/delete",async(req,res)=>{
 });
 app.post("/delete",async(req,res)=>{
     if (req.isAuthenticated()){
-        if (req.user.admin === "Y"){
+        const email = req.user.email;
+        const checkAdmin = await db.query("SELECT * FROM users WHERE email = $1 AND admin = $2",[email,'Y']);
+        if (checkAdmin.rows.length > 0){
             try{
                 const userData = req.body.produto;
                 const dadosTratados = Number(userData.trim());
@@ -154,7 +156,7 @@ app.post("/delete",async(req,res)=>{
                     console.log(err);
                }
         }else{
-            res.send("You do not have permission to do that.").statusCode(300)
+            res.send("You do not have permission to do that.");
             
         }
     }else{
@@ -178,6 +180,9 @@ app.get("/register",(req,res)=>{
 app.post("/register", async (req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
+    if(password.length === 0){
+        res.send("Password cannot be empty.")
+    }else{
     const user = await db.query("SELECT * FROM users WHERE email = $1",[username]);
     if (user.rows.length > 0){
         console.log('You re already registered.');
@@ -188,7 +193,7 @@ app.post("/register", async (req,res)=>{
             console.log(user.rows[0]);
             res.render("index.ejs");
         });
-    }
+    }}
 });
 
 passport.use("local",new Strategy( async function verify(username,password,cb){
@@ -207,7 +212,7 @@ passport.use("local",new Strategy( async function verify(username,password,cb){
                     }
                 }
             })}else{
-               return cb("User not found.");
+               return cb(null,false);
             };
     }catch(err){
         console.log(err);        

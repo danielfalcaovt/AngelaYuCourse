@@ -38,6 +38,7 @@ html,body{
 main{
     display: grid;
     grid-template-columns: 0.1fr 0.8fr 0.1fr;
+    z-index: 3;
 }
 main >div{
     background-color: white;
@@ -108,8 +109,9 @@ main .send-area > div{
 footer{
     display: grid;
     height: 10vh;
+    z-index: -1;
     grid-template-columns: 0.1fr 0.8fr 0.1fr;
-    background-image: linear-gradient(to right, #5A1E68,#450B53);
+    background-image: linear-gradient(to right, #92298d,#450B53);
 }
 footer > div{
     grid-area: 1/2/1/2;
