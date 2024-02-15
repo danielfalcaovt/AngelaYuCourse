@@ -51,7 +51,6 @@ app.get("/cadastro", async (req,res)=>{
          const userid = req.user.id;
          const result = await db.query("SELECT * FROM posts");
          const cadastrados = result.rows;
-         console.log(cadastrados);
          res.render("index.ejs",{
              products:cadastrados,
              cadastro:true
@@ -69,19 +68,37 @@ app.post("/cadastro",async(req,res)=>{
     if (req.isAuthenticated()){
         const userid = req.user.id;
         const produto = req.body.produto.trim();
-        console.log(produto);
+        const price = parseFloat(req.body.price.trim()).toFixed(2);
+        console.log(price);
         const estoque = req.body.estoque.trim();
-        let checkHave = await db.query("SELECT * FROM posts WHERE (posttext = $1 AND estoque = $2)",[produto,estoque]);
+
+        let checkHave = await db.query("SELECT * FROM posts WHERE (produto = $1 AND estoque = $2)",[produto,estoque]);
         if (checkHave.rows.length > 0){
             console.log('Already registered.');
         }else{
-            await db.query("INSERT INTO posts(posttext,estoque,userid) VALUES($1,$2,$3)",[produto,estoque,userid]); 
+            await db.query("INSERT INTO posts(produto,estoque,userid,price) VALUES($1,$2,$3,$4)",[produto,estoque,userid,price]); 
         }
-        res.redirect("/");
+        res.redirect("/cadastro");
     }else{
         res.redirect("/login");
     }
 });
+
+app.get("/alterar", async(req,res)=>{
+    if (req.isAuthenticated()){
+        const userData = await db.query("SELECT * FROM posts");
+        if(userData.rows.length > 0){
+            
+        }else{
+            console.log("Data not found.");
+            res.render("index.ejs");
+        }
+
+    }else{
+        res.redirect("/login");
+    }
+});
+
 app.get("/consulta",async(req,res)=>{
     if(req.isAuthenticated()){
         try{
@@ -101,21 +118,34 @@ app.get("/consulta",async(req,res)=>{
 })
 app.post("/consulta",async(req,res)=>{
     if(req.isAuthenticated()){
-        const userData = req.body.produto.trim();
-        const result = await db.query("SELECT * FROM posts WHERE posttext = $1",[userData]);
-        console.log(result.rows);
-        if (result.rows.length >0 ){
+        function isNumber(n) {
+            if(!isNaN(parseFloat(n)) && isFinite(n)){
+                return true
+            }else{
+                return false
+            };
+        };
+        const userData = req.body.produto;
+        const goodData = Number(userData);
+        let result = await db.query('SELECT * FROM posts WHERE id = $1',[`${goodData}`]);
+        if (result.rows.length == 1){
             const produto = result.rows[0];
             res.render("index.ejs",{
                 products:produto,
                 consulta:true
             })
+        }else if (result.rows.length > 1){
+            const produtos = result.rows;
+            res.render("index.ejs",{
+                products:produtos,
+                consulta:true
+            });
         }else{
             res.redirect("/consulta");
         };
     }else{
         res.redirect("/login");
-    }
+    };
 });
 
 app.get("/delete",async(req,res)=>{

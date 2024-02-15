@@ -13,7 +13,7 @@
   },
   "name": "scea",
   "version": "1.0.0",
-  "main": "SCEA.js",
+  "main": "build/SCEA.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
